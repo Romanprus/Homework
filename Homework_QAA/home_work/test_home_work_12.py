@@ -54,19 +54,18 @@ XPATH:
 
 
 import time
-from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 
-def test_login():
-    """" function for auto login on Chrome browser"""
-    driver_chrome = Chrome()
-    driver_chrome.maximize_window()
-    driver_chrome.get('https://www.demoblaze.com')
+def test_login(create_driver):
+    """" function for auto login on Chrome browse"""
+    driver = create_driver
+    wait = WebDriverWait(driver, 5)
+
     header_bar_login_locator = "//a[@data-target='#logInModal']"
     login_page_element = driver_chrome.find_element(By.XPATH, header_bar_login_locator)
     login_page_element.click()
-    time.sleep(3)
     user_name = 'test'
     password = 'test'
 
@@ -97,5 +96,4 @@ def test_login():
     time.sleep(4)
     assert verify_name is True, f"User is not logged in"
 
-    driver_chrome.quit()
     
