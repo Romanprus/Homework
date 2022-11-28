@@ -55,19 +55,17 @@ XPATH:
 
 import time
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 
 
-def test_login(create_driver):
+def test_login(create_driver, create_wait):
     """" function for auto login on Chrome browse"""
     driver = create_driver
-    wait = WebDriverWait(driver, 5)
+    wait = create_wait
 
     header_bar_login_locator = "//a[@data-target='#logInModal']"
-    login_page_element = driver_chrome.find_element(By.XPATH, header_bar_login_locator)
+    login_page_element = driver.find_element(By.XPATH, header_bar_login_locator)
     login_page_element.click()
-    user_name = 'test'
-    password = 'test'
+
 
     # User name structure
     user_name_locator = "//input[@id='loginusername']"
