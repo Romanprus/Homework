@@ -1,9 +1,7 @@
 import configparser
 
-
-abs_path = '/Homework_QAA/home_work/configurations/configuration.ini'
 config = configparser.RawConfigParser()
-config.read(abs_path)
+config.read('/Users/roman/PycharmProjects/Homework/Homework_QAA/home_work/configurations/configuration.ini')
 
 
 class ReadConfig:
@@ -22,3 +20,5 @@ class ReadConfig:
     @staticmethod
     def get_driver_id():
         return config.get('browser', 'browser_id')
+
+

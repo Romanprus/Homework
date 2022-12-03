@@ -52,46 +52,31 @@ XPATH:
 
 """
 
-
 import time
 from selenium.webdriver.common.by import By
 
 
-def test_login(create_driver, create_wait):
+def test_login(open_login_window):
     """" function for auto login on Chrome browse"""
-    driver = create_driver
-    wait = create_wait
-
-    header_bar_login_locator = "//a[@data-target='#logInModal']"
-    login_page_element = driver.find_element(By.XPATH, header_bar_login_locator)
-    login_page_element.click()
+    login_window = open_login_window
+    all_courses = login_window.login("test_auto50@gmail.com", 'number2000')
+    assert all_courses.user_avatar_is_visible() is True, 'User not login'
 
 
-    # User name structure
-    user_name_locator = "//input[@id='loginusername']"
-    user_name_element = driver_chrome.find_element(By.XPATH, user_name_locator)
-    user_name_element.clear()
-    user_name_element.send_keys(user_name)
-    time.sleep(3)
+def test_search(open_login_window, search):
+    login_window = open_login_window
+    all_courses = login_window.login("test_auto50@gmail.com", 'number2000')
+    main_screen = search.enter_something_in_search('Course')
+    loop = main_screen
+    assert loop == search.enter_something_in_search('Course')
 
-    # Password structure
-    password_locator = "div.form-group>input#loginpassword"
-    password_element = driver_chrome.find_element(By.CSS_SELECTOR, password_locator)
-    password_element.clear()
-    password_element.send_keys(password)
-    time.sleep(2)
 
-    # login button structure
-    login_button_locator = "//button[@class='btn btn-primary' and @onclick='logIn()']"
-    login_button_element = driver_chrome.find_element(By.XPATH, login_button_locator)
-    login_button_element.click()
-    time.sleep(3)
+def test_select_course(main_screen, play_video):
+    all_courses = main_screen
+    course = main_screen.choose_course()
+    play = play_video.play_video()
+    assert play.is_video_start() is True, "Click play button"
 
-    # user after login
-    welcome_name_locator = "a#nameofuser"
-    welcome_name_element = driver_chrome.find_element(By.CSS_SELECTOR, welcome_name_locator)
-    verify_name = welcome_name_element.is_displayed()
-    time.sleep(4)
-    assert verify_name is True, f"User is not logged in"
-
-    
+def test_register_user(open_register_window):
+    register = open_register_window
+    assert register.is_title_visible() is True, "Open Login window to procide registration"
