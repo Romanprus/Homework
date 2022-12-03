@@ -1,12 +1,12 @@
 import time
-
+import json
 import pytest
-
 from Homework_QAA.home_work.page_objects.all_courses_page.all_courses_page import AllCourses
 from Homework_QAA.home_work.page_objects.course_page.course_page import CoursePage
 from Homework_QAA.home_work.page_objects.forgot_password_page.forgot_password_page import ForgotPass
 from Homework_QAA.home_work.page_objects.login_window.login_window import LoginWindow
 from Homework_QAA.home_work.page_objects.register_page.register_page import RegisterPage
+from Homework_QAA.home_work.utilities.configuration import Configuration
 from Homework_QAA.home_work.utilities.driver_factory import DriverFactory
 from Homework_QAA.home_work.utilities.read_configs import ReadConfig
 
@@ -23,13 +23,24 @@ def pytest_configure(config):
         "markers", 'smoke: for smoke'
     )
 
+@pytest.fixture()
+def env():
+    """
+    This fixture gives access to configuraton.json
+    :return: dict
+    """
+    with open('/Users/roman/PycharmProjects/Homework/Homework_QAA/home_work/configurations/configuration.json') as f:
+        data = f.read()
+        json_to_dict = json.loads(data)
+    configs = Configuration(**json_to_dict)
+    return configs
 
 @pytest.fixture()
-def create_driver():
+def create_driver(env):
     """fixture for creating driver"""
-    driver = DriverFactory.create_driver(driver_id=ReadConfig.get_driver_id())
+    driver = DriverFactory.create_driver(env.browser_id)
     driver.maximize_window()
-    driver.get(ReadConfig.get_base_url())
+    driver.get(env.base_url)
     yield driver
     driver.quit()
 

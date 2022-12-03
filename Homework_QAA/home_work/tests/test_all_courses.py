@@ -1,8 +1,8 @@
 import pytest
 
 @pytest.mark.smoke
-def test_user_search(open_login_window): #possible captcha
-    login = open_login_window.login('test_auto50@gmail.com', 'number2000')
+def test_user_search(open_login_window,env): #possible captcha
+    login = open_login_window.login(env.email, env.password)
     screen = login.enter_something_in_search('Das')
     assert screen.is_search_titile_visible() is True
 
