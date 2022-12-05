@@ -13,10 +13,8 @@ class CoursePage(BasePage):
     __play_button = (By.XPATH, '//button[@class="w-big-play-button w-css-reset-button-important w-vulcan-v2-button"]')
     __video_start = (By.XPATH, '//div[@id="w-vulcan-v2-31"]')
     __course_info_section = (By.XPATH, "//header//h3[text()='Create a React web app and deploy to Microsoft Azure']")
-    __course_info_section_second_lesson = (
-    By.XPATH, "//header//h3[text()='Coding and testing an authentication API [NodesJs + Cypress]']")
-    __hide_button = (
-    By.XPATH, "//h3[text()='Coding and testing an authentication API [NodesJs + Cypress]']//..//button")
+    __course_info_section_second_lesson = (By.XPATH, "//header//h3[text()='Coding and testing an authentication API [NodesJs + Cypress]']")
+    __hide_button = (By.XPATH, "//h3[text()='Coding and testing an authentication API [NodesJs + Cypress]']//..//button")
     __star_course = (By.XPATH, '//div[@class="pricing-table__list-item-details"]//..//a')
     __instructor_email = (By.XPATH, '//*[@class="instructor__email"]')
     __instructor_photo = (By.CSS_SELECTOR, 'div[class="instructor__avatar"]')
@@ -27,10 +25,10 @@ class CoursePage(BasePage):
         self._click(self.__play_button)
         return self
 
-    def is_video_start(self):
+    def is_video_start(self) -> 'bool':
         return self._is_displayed(self.__video_start)
 
-    def is_title_visible(self):
+    def is_title_visible(self) -> 'bool':
         return self._is_displayed(self.__cource_title)
 
     def open_info_section(self):
@@ -46,14 +44,14 @@ class CoursePage(BasePage):
         self._click(self.__star_course)
         return StartCourse(self._driver)
 
-    def is_email_is_present(self):
+    def is_email_present(self) -> 'bool':
         return self._is_displayed(self.__instructor_email)
 
-    def is_photo_is_displayed(self):
+    def is_photo_displayed(self) -> 'bool':
         return self._is_displayed(self.__instructor_photo)
 
-    def is_info_list_displayed(self):
+    def is_info_list_displayed(self) -> 'bool':
         return self._is_displayed(self.__first_lesson_info)
 
-    def is_info_list_second_lesson_displayed(self):
+    def is_info_list_second_lesson_displayed(self) -> 'bool':
         return self._is_displayed(self.__second_lesson_info)

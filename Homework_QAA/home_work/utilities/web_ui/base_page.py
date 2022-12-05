@@ -18,9 +18,6 @@ class BasePage:
     def _wait_until_clickable(self, locator):
         return self.__wait.until(EC.element_to_be_clickable(locator))
 
-    def _wait_until_tickable(self, locator):
-        return self.__wait.until(EC.element_to_be_clickable(locator))
-
     def _wait_until_element_visible(self, locator):
         return self.__wait.until(EC.visibility_of_element_located(locator))
 
@@ -40,10 +37,6 @@ class BasePage:
         element = self._wait_until_clickable(locator)
         element.click()
 
-    def _tick(self, locator):
-        element = self._wait_until_tickable(locator)
-        element.click()
-
     def _is_displayed(self, locator):
         try:
             self._wait_until_element_visible(locator)
@@ -58,6 +51,11 @@ class BasePage:
         except TimeoutException:
             return False
 
-    def _sent_keys(self, driver):
-        driver = self._driver.send_keys(Keys.ENTER)
-        return driver
+    def _send_enter(self, locator):
+        element = self._wait_until_element_located(locator)
+        element.send_keys(Keys.ENTER)
+
+    def _get_value(self, locator):
+        element = self._wait_until_element_located(locator)
+        var = element.text.encode('utf-8')
+        return str(var)

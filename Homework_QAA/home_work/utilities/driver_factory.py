@@ -1,5 +1,7 @@
 from selenium.webdriver import Chrome, Firefox, Edge
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.edge.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
@@ -13,7 +15,7 @@ class DriverFactory:
 
     @staticmethod
     def create_driver(driver_id: int, is_headless=False):
-        if int(driver_id) == 1:
+        if int(driver_id) == DriverFactory.CHROME:
             chrome_options = Options()
             if is_headless:
                 chrome_options.add_argument("--headless")

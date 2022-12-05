@@ -1,9 +1,12 @@
 import time
 import json
 import pytest
+
+from Homework_QAA.home_work.CONSTANTS import ROOT_DIR
 from Homework_QAA.home_work.page_objects.all_courses_page.all_courses_page import AllCourses
 from Homework_QAA.home_work.page_objects.course_page.course_page import CoursePage
 from Homework_QAA.home_work.page_objects.forgot_password_page.forgot_password_page import ForgotPass
+from Homework_QAA.home_work.page_objects.forgot_password_page.reset_page import ResetPage
 from Homework_QAA.home_work.page_objects.login_window.login_window import LoginWindow
 from Homework_QAA.home_work.page_objects.register_page.register_page import RegisterPage
 from Homework_QAA.home_work.utilities.configuration import Configuration
@@ -23,17 +26,19 @@ def pytest_configure(config):
         "markers", 'smoke: for smoke'
     )
 
+
 @pytest.fixture()
 def env():
     """
     This fixture gives access to configuraton.json
     :return: dict
     """
-    with open('/Users/roman/PycharmProjects/Homework/Homework_QAA/home_work/configurations/configuration.json') as f:
+    with open(f'{ROOT_DIR}/configurations/configuration.json') as f:
         data = f.read()
         json_to_dict = json.loads(data)
     configs = Configuration(**json_to_dict)
     return configs
+
 
 @pytest.fixture()
 def create_driver(env):
@@ -68,9 +73,17 @@ def open_forgot_pass_window(create_driver, open_login_window):
 
 
 @pytest.fixture()
+def reset_page(create_driver, open_forgot_pass_window):
+    """fixture for open user reset password"""
+    reset_window = open_forgot_pass_window.reset_password(email)
+    return ResetPage(create_driver)
+
+
+@pytest.fixture()
 def main_screen(create_driver):
     """fixture for all courses screen"""
     return AllCourses(create_driver)
+
 
 @pytest.fixture()
 def scroll_main_screen(create_driver, open_login_window):
@@ -85,6 +98,7 @@ def open_course_page(create_driver, main_screen):
     course = main_screen.choose_course()
     return CoursePage(create_driver)
 
+
 @pytest.fixture()
 def scroll_course_page(create_driver, main_screen):
     """fixture for open Course Info and scroll the page"""
@@ -92,12 +106,14 @@ def scroll_course_page(create_driver, main_screen):
     driver = create_driver.execute_script("window.scrollTo(0, 330)")
     return CoursePage(create_driver)
 
+
 @pytest.fixture()
 def scroll_course_page_to_middle(create_driver, main_screen):
     """fixture for open Course Info and scroll the page"""
     course = main_screen.choose_course()
     driver = create_driver.execute_script("window.scrollTo(0, 1600)")
     return CoursePage(create_driver)
+
 
 @pytest.fixture()
 def scroll_course_page_to_end(create_driver, main_screen):

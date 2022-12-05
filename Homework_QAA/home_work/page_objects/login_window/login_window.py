@@ -14,8 +14,8 @@ class LoginWindow(BasePage):
     __sign_in = (By.XPATH, "//div[@class='header__wrapper']//a[@href='/users/sign_in']")
     __email_field = (By.XPATH, "//input[@id='user[email]']")
     __password_field = (By.CSS_SELECTOR, 'div input[type="password"]')
-    __enter_button = (By.XPATH, "//div//div//input[@value='Sign in']")
-    __check_box_remember = (By.XPATH, "//label//input[@id='user[remember_me]']")
+    __enter_button = (By.XPATH, "//div//input[@value='Sign in']")
+    __check_box_remember = (By.XPATH, "//input[@id='user[remember_me]']")
     __create_account = (By.CSS_SELECTOR, "aside a")
     __forgot_pass = (By.XPATH, "//a[@class='form__forgot-password']")
     __facebook_login = (By.CSS_SELECTOR, "ul li a[class='button facebook']")
@@ -37,7 +37,8 @@ class LoginWindow(BasePage):
         return self
 
     def click_sing_in_button(self):
-        return self._click(self.__enter_button)
+        self._click(self.__enter_button)
+        return self
 
     def login(self, email, password):
         self.click_on_sing_in().set_email(email).set_pass(password).click_sing_in_button()
@@ -47,11 +48,12 @@ class LoginWindow(BasePage):
         self._click(self.__create_account)
         return RegisterPage(self._driver)
 
-    def tick_remember_me(self):
-        return self._click(self.__check_box_remember)
+    def click_remember_me(self):
+        self._click(self.__check_box_remember)
+        return self
 
     def login_with_remember(self, email, password):
-        self.click_on_sing_in().set_email(email).set_pass(password).tick_remember_me()
+        self.click_on_sing_in().set_email(email).set_pass(password).click_remember_me()
         self.click_sing_in_button()
         return AllCourses(self._driver)
 
@@ -60,10 +62,12 @@ class LoginWindow(BasePage):
         return ForgotPass(self._driver)
 
     def click_on_facebook_link(self):
-        return self._click(self.__facebook_login)
+        self._click(self.__facebook_login)
+        return self
 
     def login_without_data(self):
-        return self.click_on_sing_in().click_sing_in_button()
+        self.click_on_sing_in().click_sing_in_button()
+        return LoginWindow(self._driver)
 
     def login_with_invalid_password(self,email, password):
         self.click_on_sing_in().set_email(email).set_pass(password).click_sing_in_button()
@@ -73,8 +77,8 @@ class LoginWindow(BasePage):
         self.click_on_sing_in().set_email(email).set_pass(password).click_sing_in_button()
         return LoginWindow(self._driver)
 
-    def is_alert_present(self):
+    def is_alert_present(self) -> 'bool':
         return self._is_displayed(self.__alert_message)
 
-    def is_sign_in_button_displayed(self):
+    def is_sign_in_button_displayed(self) -> 'bool':
         return self._is_displayed(self.__enter_button)

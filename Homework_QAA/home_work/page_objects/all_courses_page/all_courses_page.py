@@ -1,3 +1,4 @@
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
 from Homework_QAA.home_work.page_objects.course_page.course_page import CoursePage
@@ -19,15 +20,18 @@ class AllCourses(BasePage):
     __drop_down_menu = (By.XPATH, '//li[class="dropdown header__nav-item"]')  # appears after login
     __logout_button = (By.CSS_SELECTOR, 'ul[class="dropdown__menu"]:last-child a[href="/users/sign_out"]')  # appears after login
     __search_title = (By.CSS_SELECTOR, 'h2[class="products__title"]')  # only after seach
-    __more_courses = (By.XPATH, "//section//a[text()='View more courses']") #button appears only before login
+    __more_courses = (By.XPATH, "//section//a[text()='View more courses']")  # button appears only before login
     __first_title = (By.XPATH, "//header/h2[text()='Worldclass Automation Training']")
 
-
-    def user_avatar_is_visible(self):
+    def is_user_avatar_visible(self) -> 'bool':
         return self._is_displayed(self.__user_avatar)
 
     def enter_something_in_search(self, text=str):
         self._send_keys(self.__search_field, text)
+        return self
+
+    def press_enter(self):
+        self._send_enter(self.__search_field)
         return self
 
     def choose_course(self):
@@ -46,22 +50,22 @@ class AllCourses(BasePage):
         self._click(self.__drop_down_menu)
         return self
 
-    def logaut(self):
+    def logout(self):
         self._click(self.__logout_button)
         return AllCourses(self._driver)
 
-    def is_search_clicable(self):
+    def click_on_search(self):
         self._click(self.__search_field)
         return self
 
-    def is_search_titile_visible(self):
+    def is_search_title_visible(self) -> 'bool':
         return self._is_displayed(self.__search_title)
 
     def choose_page(self):
         self._click(self.__second_page)
         return self
 
-    def is_first_course_invisible(self):
+    def is_first_course_invisible(self) -> 'bool':
         return self._is_invisible(self.__first_course_item)
 
     def open_collections(self):
@@ -72,5 +76,5 @@ class AllCourses(BasePage):
         self._click(self.__more_courses)
         return self
 
-    def is_main_title_displayed(self):
+    def is_main_title_displayed(self) -> 'bool':
         return self._is_displayed(self.__first_title)

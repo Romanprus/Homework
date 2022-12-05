@@ -1,7 +1,9 @@
 import configparser
 
+from Homework_QAA.home_work.CONSTANTS import ROOT_DIR
+
 config = configparser.RawConfigParser()
-config.read('/Users/roman/PycharmProjects/Homework/Homework_QAA/home_work/configurations/configuration.ini')
+config.read(f'{ROOT_DIR}/configurations/configuration.ini')
 
 
 class ReadConfig:

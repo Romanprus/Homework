@@ -11,14 +11,18 @@ class ResetPage(BasePage):
 
     __success_reset_screen = (By.XPATH, "//*[text()='Help is on the way!']")
     __sign_in = (By.XPATH, "//div[@class='header__wrapper']//a[@href='/users/sign_in']")
-    __enter_button = (By.XPATH, "//div//div//input[@value='Sign in']")
+    __enter_button = (By.XPATH, "//div//input[@value='Sign in']")
 
-    def sucssess_title(self):
+    def is_sucssess_title_displayed(self) -> 'bool':
         return self._is_displayed(self.__success_reset_screen)
+
+    def title_value(self):
+        self._get_value(self.__success_reset_screen)
+        return self
 
     def back_to_sign_in_screen(self):
         self._click(self.__sign_in)
         return self
 
-    def is_sign_in_button_displayed(self):
+    def is_sign_in_button_displayed(self) -> 'bool':
         return self._is_displayed(self.__enter_button)

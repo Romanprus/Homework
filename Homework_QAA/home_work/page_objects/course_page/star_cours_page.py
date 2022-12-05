@@ -10,5 +10,5 @@ class StartCourse(BasePage):
 
     __start_title = (By.CSS_SELECTOR, "div[class='product-title cart-info__title']")
 
-    def is_course_name_displayed(self):
+    def is_course_name_displayed(self) -> 'bool':
         return self._is_displayed(self.__start_title)

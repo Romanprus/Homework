@@ -4,8 +4,8 @@ import pytest
 @pytest.mark.smoke
 def test_click_on_forgot_pass(open_forgot_pass_window):
     forgot_window = open_forgot_pass_window
-    assert forgot_window.title_is_present() is True
-
+    assert forgot_window.title_value() == "Forgot your Password?" #forgot_window.is_title_is_present() is True and
+    c = 0
 
 @pytest.mark.smoke
 def test_reset_password(open_forgot_pass_window, env):
