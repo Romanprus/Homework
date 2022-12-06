@@ -16,7 +16,7 @@ class AllCourses(BasePage):
     __collections = (By.CSS_SELECTOR, 'section[class="header__logo header__logo___2909e"]')
     __previous_page_button = (By.XPATH, '//li//i[@class="fa fa-chevron-left"]')
     __next_page_button = (By.XPATH, '//*[@aria-label="Next page"]')
-    __first_course_item = (By.CSS_SELECTOR, 'div ul:first-child li:first-child a[tabindex="0"] header img')
+    __course_item = (By.CSS_SELECTOR, 'div a[href="/courses/react-and-nodejs"]')
     __drop_down_menu = (By.XPATH, '//li[class="dropdown header__nav-item"]')  # appears after login
     __logout_button = (By.CSS_SELECTOR, 'ul[class="dropdown__menu"]:last-child a[href="/users/sign_out"]')  # appears after login
     __search_title = (By.CSS_SELECTOR, 'h2[class="products__title"]')  # only after seach
@@ -35,7 +35,7 @@ class AllCourses(BasePage):
         return self
 
     def choose_course(self):
-        self._click(self.__first_course_item)
+        self._click(self.__course_item)
         return CoursePage(self._driver)
 
     def next_page(self):
@@ -66,7 +66,7 @@ class AllCourses(BasePage):
         return self
 
     def is_first_course_invisible(self) -> 'bool':
-        return self._is_invisible(self.__first_course_item)
+        return self._is_invisible(self.__course_item)
 
     def open_collections(self):
         self._click(self.__collections)

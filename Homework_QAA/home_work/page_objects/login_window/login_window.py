@@ -14,15 +14,16 @@ class LoginWindow(BasePage):
     __sign_in = (By.XPATH, "//div[@class='header__wrapper']//a[@href='/users/sign_in']")
     __email_field = (By.XPATH, "//input[@id='user[email]']")
     __password_field = (By.CSS_SELECTOR, 'div input[type="password"]')
-    __enter_button = (By.XPATH, "//div//input[@value='Sign in']")
+    __enter_button = (By.XPATH, "//div//button[@type='submit']")
     __check_box_remember = (By.XPATH, "//input[@id='user[remember_me]']")
-    __create_account = (By.CSS_SELECTOR, "aside a")
+    __create_account = (By.CSS_SELECTOR, ' a[href="/users/sign_up"]')
     __forgot_pass = (By.XPATH, "//a[@class='form__forgot-password']")
     __facebook_login = (By.CSS_SELECTOR, "ul li a[class='button facebook']")
     __link_to_all_courses = (By.XPATH, "//section[@class='header__logo header__logo___2909e']//img")
     __message = (By.XPATH, "//*[text()='Welcome Back!']")
     __footer_link = (By.XPATH, "//*[text()='Powered By Thinkific']")
-    __alert_message = (By.XPATH, "//li[text()='Invalid email or password.']")
+    __alert_message = (By.CSS_SELECTOR, 'ul[class="form-error__list"]')
+    __email_alert = (By.XPATH, '//div//p[@id="user[email]-error"]')
 
     def click_on_sing_in(self):
         self._click(self.__sign_in)
@@ -69,7 +70,7 @@ class LoginWindow(BasePage):
         self.click_on_sing_in().click_sing_in_button()
         return LoginWindow(self._driver)
 
-    def login_with_invalid_password(self,email, password):
+    def login_with_invalid_password(self, email, password):
         self.click_on_sing_in().set_email(email).set_pass(password).click_sing_in_button()
         return LoginWindow(self._driver)
 
@@ -82,3 +83,11 @@ class LoginWindow(BasePage):
 
     def is_sign_in_button_displayed(self) -> 'bool':
         return self._is_displayed(self.__enter_button)
+
+    def title_value(self):
+        element = self._get_value(self.__alert_message)
+        return element
+
+    def email_value(self):
+        alert = self._get_value(self.__email_alert)
+        return alert

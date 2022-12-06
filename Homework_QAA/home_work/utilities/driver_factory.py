@@ -20,9 +20,9 @@ class DriverFactory:
             if is_headless:
                 chrome_options.add_argument("--headless")
             driver = Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-        elif int(driver_id) == 2:
+        elif int(driver_id) == DriverFactory.FIREFOX:
             driver = Firefox(service=Service(GeckoDriverManager().install()))
-        elif int(driver_id) == 3:
+        elif int(driver_id) == DriverFactory.EDGE:
             driver = Edge(service=Service(EdgeChromiumDriverManager().install()))
         else:
             driver = Chrome(service=Service(ChromeDriverManager().install()))

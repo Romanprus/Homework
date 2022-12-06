@@ -12,9 +12,12 @@ class CoursePage(BasePage):
     __cource_title = (By.XPATH, "//h1[text()='Modern React and NodeJS Development']")
     __play_button = (By.XPATH, '//button[@class="w-big-play-button w-css-reset-button-important w-vulcan-v2-button"]')
     __video_start = (By.XPATH, '//div[@id="w-vulcan-v2-31"]')
-    __course_info_section = (By.XPATH, "//header//h3[text()='Create a React web app and deploy to Microsoft Azure']")
-    __course_info_section_second_lesson = (By.XPATH, "//header//h3[text()='Coding and testing an authentication API [NodesJs + Cypress]']")
-    __hide_button = (By.XPATH, "//h3[text()='Coding and testing an authentication API [NodesJs + Cypress]']//..//button")
+    __course_info_section = (By.XPATH, '//button[@aria-controls="chapter-1"]')
+    __course_info_lesson1 = (By.XPATH, "//div//p[text()='Introduction']")
+    __course_info_section_second_lesson = (By.XPATH, '//button[@aria-controls="chapter-2"]')
+    __course_info_lesson2 = (By.XPATH, "//div//p[text()='Start a Server']")
+    __hide_button = (
+    By.XPATH, "//h3[text()='Coding and testing an authentication API [NodesJs + Cypress]']//..//button")
     __star_course = (By.XPATH, '//div[@class="pricing-table__list-item-details"]//..//a')
     __instructor_email = (By.XPATH, '//*[@class="instructor__email"]')
     __instructor_photo = (By.CSS_SELECTOR, 'div[class="instructor__avatar"]')
@@ -25,6 +28,14 @@ class CoursePage(BasePage):
         self._click(self.__play_button)
         return self
 
+    def title_value(self):
+        element = self._get_value(self.__course_info_lesson1)
+        return element
+
+    def title_value_2(self):
+        element = self._get_value(self.__course_info_lesson2)
+        return element
+
     def is_video_start(self) -> 'bool':
         return self._is_displayed(self.__video_start)
 
@@ -32,10 +43,10 @@ class CoursePage(BasePage):
         return self._is_displayed(self.__cource_title)
 
     def open_info_section(self):
-        self._click(self.__course_info_section_second_lesson)
+        self._click(self.__course_info_section)
         return self
 
-    def hide_additional_info(self):
+    def hide_info_section(self):
         self._click(self.__course_info_section)
         return self
 

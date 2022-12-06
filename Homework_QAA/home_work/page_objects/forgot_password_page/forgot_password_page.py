@@ -9,18 +9,18 @@ class ForgotPass(BasePage):
         self._driver = driver
         super().__init__(driver)
 
-    __screen_title = (By.XPATH, "//article[@class='password-reset__form']//h1")
-    __email_field = (By.CSS_SELECTOR, "div label:first-child input")
+    __screen_title = (By.XPATH, "//div[@class='password-reset__wrapper']//h2")
+    __email_field = (By.XPATH, "//input[@id='user[email]']")
     __submit_button = (By.XPATH, '//input[@value="Submit"]')
     __enter_button = (By.XPATH, "//div//div//input[@value='Sign in']")
     __sign_in = (By.XPATH, "//div[@class='header__wrapper']//a[@href='/users/sign_in']")
 
-    def is_title_is_present(self) -> 'bool':
+    def is_title_present(self) -> 'bool':
         return self._is_displayed(self.__screen_title)
 
     def title_value(self):
-        self._get_value(self.__screen_title)
-        return self
+        element = self._get_value(self.__screen_title)
+        return element
 
     def is_email_field_present(self) -> 'bool':
         return self._is_displayed(self.__email_field)

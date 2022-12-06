@@ -4,14 +4,14 @@ import pytest
 @pytest.mark.smoke
 def test_click_on_forgot_pass(open_forgot_pass_window):
     forgot_window = open_forgot_pass_window
-    assert forgot_window.title_value() == "Forgot your Password?" #forgot_window.is_title_is_present() is True and
-    c = 0
+    value = forgot_window.title_value()
+    assert forgot_window.title_value() == "Forgot your Password?"
 
 @pytest.mark.smoke
-def test_reset_password(open_forgot_pass_window, env):
+def test_reset_password(open_forgot_pass_window, reset_page, env):
     reset = open_forgot_pass_window
     reset = open_forgot_pass_window.reset_password(env.reset_email)
-    assert reset.sucssess_title() is True
+    assert reset.is_sucssess_title_displayed() is True and reset.title_value() == "Help is on the way!"
 
 
 @pytest.mark.regression

@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 
@@ -8,15 +10,9 @@ def test_play_video(open_course_page):
 
 
 @pytest.mark.regression
-def test_hide_curriculum_about_course(scroll_course_page):
-    course = scroll_course_page.hide_additional_info()
-    assert course.is_info_list_displayed() is False
-
-
-@pytest.mark.regression
 def test_open_curriculum_about_course(scroll_course_page):
-    course = scroll_course_page.hide_additional_info().open_info_section()
-    assert course.is_info_list_second_lesson_displayed() is True
+    course = scroll_course_page.open_info_section()
+    assert course.title_value() == "Introduction"
 
 
 @pytest.mark.regression

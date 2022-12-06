@@ -7,22 +7,27 @@ class RegisterPage(BasePage):
         self._driver = driver
         super().__init__(driver)
 
-    __title = (By.XPATH, '//article[@class="sign-up__form"]//h1[@class="page__heading" and text()]')
+    __title = (By.XPATH, '//article[@id="create-account"]//h2')
     __first_name = (By.XPATH, "//input[@id='user[first_name]']")
     __last_name = (By.XPATH, '//input[@id="user[last_name]"]')
     __email = (By.XPATH, '//input[@id="user[email]"]')
     __password = (By.XPATH, '//input[@id="user[password]"]')
-    __terms_check_box = (By.CSS_SELECTOR, 'label input[id="user[terms]"]')
+    __terms_check_box = (By.CSS_SELECTOR, 'div input[id="user[terms]"]')
     __terms_link = (By.XPATH, "//label//a[text()='Terms of Use']")
-    __sign_up_button = (By.CSS_SELECTOR, 'div[class="form__button-group"] input')
+    __sign_up_button = (By.CSS_SELECTOR, 'div button[data-callback="onSubmit"]')
     __have_acc_link = (By.XPATH, "//aside//a[text()]")
     __sign_in_link = (By.CSS_SELECTOR, "section ul:last-child li:last-child a")
     __user_avatar = (By.XPATH, "//img[@class='header__user-avatar']")
     __terms_page = (By.XPATH, "//[text()='ULTIMATEQA.COM’S']")
     __error_list = (By.CSS_SELECTOR, 'ul[class="form-error__list"]')
+    __terms_page_agreement = (By.XPATH, "//span[text()='SERVICE AGREEMENT AND TERMS OF USE']")
 
     def is_title_visible(self) -> 'bool':
         return self._is_displayed(self.__title)
+
+    def title_value(self):
+        element = self._get_value(self.__title)
+        return element
 
     def set_first_name(self, name):
         self._send_keys(self.__first_name, name)
@@ -63,10 +68,18 @@ class RegisterPage(BasePage):
     def is_user_avatar_visible(self) -> 'bool':
         return self._is_displayed(self.__user_avatar)
 
-    def is_error_list_displayed(self):
-        self._is_displayed(self.__error_list)
-        return self
+    def is_error_list_displayed(self) -> 'bool':
+        return self._is_displayed(self.__error_list)
+
+
+    def error_list_value(self):
+        error_list = self._get_value(self.__error_list)
+        return error_list
 
     def have_account(self):
         self._click(self.__have_acc_link)
         return self
+
+    def terms_value(self):
+        name = self._get_value(self.__terms_page_agreement)
+        return name

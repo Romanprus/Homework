@@ -60,8 +60,8 @@ def open_login_window(create_driver):
 def open_register_window(create_driver, open_login_window):
     """fixture for open user Registration"""
     login = open_login_window.click_on_sing_in()
-    driver = create_driver.execute_script("window.scrollTo(0, 250)")
-    register = open_login_window.click_create_new_acc()
+    driver = create_driver.execute_script("window.scrollTo(100, 550)")
+    register = login.click_create_new_acc()
     return RegisterPage(create_driver)
 
 
@@ -73,9 +73,8 @@ def open_forgot_pass_window(create_driver, open_login_window):
 
 
 @pytest.fixture()
-def reset_page(create_driver, open_forgot_pass_window):
+def reset_page(create_driver):
     """fixture for open user reset password"""
-    reset_window = open_forgot_pass_window.reset_password(email)
     return ResetPage(create_driver)
 
 
@@ -103,7 +102,7 @@ def open_course_page(create_driver, main_screen):
 def scroll_course_page(create_driver, main_screen):
     """fixture for open Course Info and scroll the page"""
     course = main_screen.choose_course()
-    driver = create_driver.execute_script("window.scrollTo(0, 330)")
+    driver = create_driver.execute_script("window.scrollTo(0, 520)")
     return CoursePage(create_driver)
 
 

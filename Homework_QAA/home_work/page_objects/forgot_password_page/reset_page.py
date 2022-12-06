@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 
-
 from Homework_QAA.home_work.utilities.web_ui.base_page import BasePage
 
 
@@ -17,8 +16,8 @@ class ResetPage(BasePage):
         return self._is_displayed(self.__success_reset_screen)
 
     def title_value(self):
-        self._get_value(self.__success_reset_screen)
-        return self
+        element = self._get_value(self.__success_reset_screen)
+        return element
 
     def back_to_sign_in_screen(self):
         self._click(self.__sign_in)

@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 class BasePage:
     def __init__(self, driver):
         self._driver = driver
-        self.__wait = WebDriverWait(self._driver, 2)
+        self.__wait = WebDriverWait(self._driver, 5)
 
     def _wait_until_element_located(self, locator):
         return self.__wait.until(EC.presence_of_element_located(locator))
@@ -57,5 +57,5 @@ class BasePage:
 
     def _get_value(self, locator):
         element = self._wait_until_element_located(locator)
-        var = element.text.encode('utf-8')
+        var = element.text
         return str(var)
