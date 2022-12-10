@@ -2,6 +2,7 @@ import time
 import json
 import pytest
 
+from Homework_QAA.data_classes.user import User
 from Homework_QAA.home_work.CONSTANTS import ROOT_DIR
 from Homework_QAA.home_work.page_objects.all_courses_page.all_courses_page import AllCourses
 from Homework_QAA.home_work.page_objects.course_page.course_page import CoursePage
@@ -120,3 +121,8 @@ def scroll_course_page_to_end(create_driver, main_screen):
     course = main_screen.choose_course()
     driver = create_driver.execute_script("window.scrollTo(0, 1900)")
     return CoursePage(create_driver)
+
+
+@pytest.fixture()
+def create_user():
+    return User()
