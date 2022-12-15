@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
@@ -23,58 +24,73 @@ class AllCourses(BasePage):
     __more_courses = (By.XPATH, "//section//a[text()='View more courses']")  # button appears only before login
     __first_title = (By.XPATH, "//header/h2[text()='Worldclass Automation Training']")
 
+    @allure.step
     def is_user_avatar_visible(self) -> 'bool':
         return self._is_displayed(self.__user_avatar)
 
+    @allure.step
     def enter_something_in_search(self, text=str):
         self._send_keys(self.__search_field, text)
         return self
 
+    @allure.step
     def press_enter(self):
         self._send_enter(self.__search_field)
         return self
 
+    @allure.step
     def choose_course(self):
         self._click(self.__course_item)
         return CoursePage(self._driver)
 
+    @allure.step
     def next_page(self):
         self._click(self.__next_page_button)
         return self
 
+    @allure.step
     def previous_page(self):
         self._click(self.__previous_page_button)
         return self
 
+    @allure.step
     def click_drop_down(self):
         self._click(self.__drop_down_menu)
         return self
 
+    @allure.step
     def logout(self):
         self._click(self.__logout_button)
         return AllCourses(self._driver)
 
+    @allure.step
     def click_on_search(self):
         self._click(self.__search_field)
         return self
 
+    @allure.step
     def is_search_title_visible(self) -> 'bool':
         return self._is_displayed(self.__search_title)
 
+    @allure.step
     def choose_page(self):
         self._click(self.__second_page)
         return self
 
+    @allure.step
     def is_first_course_invisible(self) -> 'bool':
         return self._is_invisible(self.__course_item)
 
+    @allure.step
     def open_collections(self):
         self._click(self.__collections)
         return self
 
+    @allure.step
     def open_more_courses(self):
         self._click(self.__more_courses)
         return self
 
+    @allure.step
     def is_main_title_displayed(self) -> 'bool':
         return self._is_displayed(self.__first_title)

@@ -1,7 +1,5 @@
-import time
 import json
 import pytest
-
 from Homework_QAA.data_classes.user import User
 from Homework_QAA.home_work.CONSTANTS import ROOT_DIR
 from Homework_QAA.home_work.page_objects.all_courses_page.all_courses_page import AllCourses
@@ -13,6 +11,8 @@ from Homework_QAA.home_work.page_objects.register_page.register_page import Regi
 from Homework_QAA.home_work.utilities.configuration import Configuration
 from Homework_QAA.home_work.utilities.driver_factory import DriverFactory
 from Homework_QAA.home_work.utilities.read_configs import ReadConfig
+from contextlib import suppress
+import allure
 
 
 def pytest_configure(config):
@@ -41,13 +41,25 @@ def env():
     return configs
 
 
+
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
+    return rep
+
 @pytest.fixture()
-def create_driver(env):
+def create_driver(env, request):
     """fixture for creating driver"""
     driver = DriverFactory.create_driver(env.browser_id)
     driver.maximize_window()
     driver.get(env.base_url)
     yield driver
+    if request.node.rep_call.failed:
+        with suppress(Exception):
+            allure.attach(driver.get_screenshot_as_png(), name=request.function.__name__,
+                          attachment_type=allure.attachment_type.PNG)
     driver.quit()
 
 

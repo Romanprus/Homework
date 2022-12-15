@@ -9,12 +9,14 @@ def test_user_search(open_login_window, env):  # possible captcha
     assert screen.is_search_title_visible() is True
 
 @pytest.mark.smoke
+@pytest.mark.skip('Skipped test')
 def test_select_course(main_screen):  # can be tested
     screen = main_screen.choose_course()
     assert screen.is_title_visible() is True
 
 
 @pytest.mark.regression
+@pytest.mark.skip('Skipped test')
 def test_click_on_second_page(scroll_main_screen):
     screen = scroll_main_screen.open_collections()
     screen = scroll_main_screen.choose_page()
@@ -22,6 +24,7 @@ def test_click_on_second_page(scroll_main_screen):
 
 
 @pytest.mark.regression
+@pytest.mark.skip('Skipped test')
 def test_change_page(scroll_main_screen):
     screen = scroll_main_screen.open_collections()
     screen = scroll_main_screen.next_page()
@@ -29,6 +32,7 @@ def test_change_page(scroll_main_screen):
 
 
 @pytest.mark.regression
+@pytest.mark.skip('Skipped test')
 def test_open_more_courses(scroll_main_screen):
     main_screen = scroll_main_screen.open_more_courses()
     assert main_screen.is_main_title_displayed() is False
