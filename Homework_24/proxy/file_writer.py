@@ -6,9 +6,9 @@ class FileWriter(Writer):
     def __init__(self, file_path):
         self.file_path = file_path
 
-    def append_to_file(self, new_data):
+    def append_to_file(self, *args):
         with open(self.file_path, 'a') as file:
-            text = file.write(new_data)
+            text = file.write(*args)
         return text
 
     def rewrite_file(self, new_data):
