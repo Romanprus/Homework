@@ -18,7 +18,12 @@ class TxtProxyWriterReader:
             return self.__result
 
     def write_file(self):
-        self.__result = self.__file_writer.write_file('new_data')
+        self.__result = self.__file_writer.append_to_file('new_data')
+        self.__is_actual = False
+        return self.__result
+
+    def rewrite_wile(self):
+        self.__result = self.__file_writer.rewrite_file('Some beauty text')
         self.__is_actual = False
         return self.__result
 
@@ -27,4 +32,6 @@ if __name__ == '__main__':
     proxy_reader = TxtProxyWriterReader('some_file.txt')
     print(proxy_reader.read_file())
     proxy_reader.write_file()
+    print(proxy_reader.read_file())
+    proxy_reader.rewrite_wile()
     print(proxy_reader.read_file())

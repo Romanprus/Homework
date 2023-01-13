@@ -3,5 +3,9 @@ from abc import ABC, abstractmethod
 
 class Writer(ABC):
     @abstractmethod
-    def write_file(self, new_data):
+    def append_to_file(self, new_data):
+        pass
+
+    @abstractmethod
+    def rewrite_file(self, new_data):
         pass
