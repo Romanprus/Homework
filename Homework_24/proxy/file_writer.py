@@ -11,7 +11,7 @@ class FileWriter(Writer):
             text = file.write(*args)
         return text
 
-    def rewrite_file(self, new_data):
+    def rewrite_file(self, *args):
         with open(self.file_path, 'w') as file:
-            text = file.write(new_data)
+            text = file.write(*args)
         return text

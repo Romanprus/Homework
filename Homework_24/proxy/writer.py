@@ -7,5 +7,5 @@ class Writer(ABC):
         pass
 
     @abstractmethod
-    def rewrite_file(self, new_data):
+    def rewrite_file(self):
         pass
