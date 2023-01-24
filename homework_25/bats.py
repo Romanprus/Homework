@@ -9,7 +9,8 @@ class Bats(FlyingMammals):
     def hang_upside_down(self):
         print("I sleep upside down")
 
-    def drink_blood(self):
+    @staticmethod
+    def drink_blood():
         print("This type of bats drink blood)")
 
 

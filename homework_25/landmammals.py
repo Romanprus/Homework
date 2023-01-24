@@ -7,4 +7,4 @@ class LandMammals(Mammals):
         super().__init__(species, genus, diet, 'land')
 
     def movement(self):
-        print("I can run")
+        print("I can running")
