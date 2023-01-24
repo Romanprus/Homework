@@ -1,6 +1,7 @@
 from homework_25.watermammal import WaterMammals
 
 
+# Inheritance
 class WaterPredator(WaterMammals):
     def __init__(self, genus: str, species: str, diet: str):
         super().__init__(genus, species, diet)

@@ -1,14 +1,17 @@
 from homework_25.landmammals import LandMammals
 
 
+# Inheritance
+
 class Predator(LandMammals):
     def __init__(self, genus: str, species: str, diet: str):
         super().__init__(genus, species, diet)
 
+    # encapsulation, hiding
     def __sit_in_ambush(self):
         print("I'm prepare to atack")
 
-
+    # encapsulation, hiding
     def __catch_pray(self):
         print("i catch pray")
 

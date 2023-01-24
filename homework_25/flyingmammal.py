@@ -1,6 +1,7 @@
 from homework_25.mammal import Mammals
 
 
+# Inheritance
 class FlyingMammals(Mammals):
     def __init__(self, species: str, genus: str, diet: str):
         super().__init__(species, genus, diet, 'Caves')
