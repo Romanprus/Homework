@@ -60,3 +60,4 @@ print(cursor)
 Collection().delete_many()
 cursor = list(Collection().find_all())
 print(cursor)
+c=0

@@ -1,6 +1,5 @@
 import allure
 from selenium.webdriver.common.by import By
-
 from Homework_QAA.home_work.page_objects.all_courses_page.all_courses_page import AllCourses
 from Homework_QAA.home_work.page_objects.forgot_password_page.forgot_password_page import ForgotPass
 from Homework_QAA.home_work.page_objects.register_page.register_page import RegisterPage
