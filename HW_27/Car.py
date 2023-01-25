@@ -7,7 +7,7 @@ class Car:
         self.transmission = transmission
 
     def __str__(self):
-        return f"Car: \n  make: {self.brand}\n  model: {self.model}  year: {self.year} with {self.engine} engine" \
+        return f"Car: \n  make: {self.brand}\n  model: {self.model} year: {self.year} with {self.engine} engine" \
                f" and {self.transmission} transmission"
 
 

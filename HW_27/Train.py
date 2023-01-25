@@ -72,7 +72,7 @@ if __name__ == '__main__':
     print(len(wagon_1))
     print(len(wagon_2))
     print(len(wagon_3))
-    print(len(wagon_4))
+    print(len(wagon_7))
     print(len(wagon_5))
     print(len(my_train))
     print(wagon_4.passengers)
