@@ -12,7 +12,7 @@ class WaterPredator(WaterMammals):
 
 
 if __name__ == '__main__':
-    Shark = WaterPredator('Shark', 'Chondrichthyes', 'Fish or Humans')
+    Shark = WaterPredator('Shark', 'Chondrichthyes', 'Fish and Humans')
     Shark.get_info()
     Shark.hunt()
     Shark.movement()

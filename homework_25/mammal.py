@@ -3,8 +3,7 @@ from abc import abstractmethod
 from homework_25.Animals import Animals
 
 
-# Inheritance
-# Abstraction
+# Inheritance and Abstraction
 class Mammals(Animals):
     # encapsulation, hiding
     def __init__(self, species: str, genus: str, diet: str, habitat: str):

@@ -2,6 +2,7 @@ import pytest
 
 
 @pytest.mark.smoke
+@pytest.mark.skip('Skipped test')
 def test_user_search(open_login_window, env):  # possible captcha
     login = open_login_window.login(env.email, env.password)
     screen = login.enter_something_in_search('Das')
@@ -9,7 +10,6 @@ def test_user_search(open_login_window, env):  # possible captcha
     assert screen.is_search_title_visible() is True
 
 @pytest.mark.smoke
-@pytest.mark.skip('Skipped test')
 def test_select_course(main_screen):  # can be tested
     screen = main_screen.choose_course()
     assert screen.is_title_visible() is True

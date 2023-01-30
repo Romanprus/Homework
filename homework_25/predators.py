@@ -2,7 +2,6 @@ from homework_25.landmammals import LandMammals
 
 
 # Inheritance
-
 class Predator(LandMammals):
     def __init__(self, genus: str, species: str, diet: str):
         super().__init__(genus, species, diet)

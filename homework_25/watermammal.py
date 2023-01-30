@@ -8,4 +8,4 @@ class WaterMammals(Mammals):
 
     # polymorphism
     def movement(self):
-        print("I can dive and swim")
+        print("I can dive and swim or be cruel")

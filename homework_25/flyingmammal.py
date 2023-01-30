@@ -7,4 +7,4 @@ class FlyingMammals(Mammals):
         super().__init__(species, genus, diet, 'Caves')
 
     def movement(self):
-        print("I can fly")
+        print("I can fling")
